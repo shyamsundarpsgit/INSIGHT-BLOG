@@ -1,0 +1,27 @@
+</section>
+
+
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-content">
+            <h6>"The best way to predict the future is to create it." - Peter Drucker</h6>
+        </div>
+    </div>
+
+</footer>
+</div>
+<div id="add-blog-container"  data-aos="zoom-in-down">
+    <div class="blog-container" >
+        <h3>Add Blog <span class="close" onclick="closeForm()"> <i class="fa-solid fa-xmark"></i></span></h3>
+        <form action="/addblog" method="post" class="blog-add-form">
+            <input type="text" name="title" required placeholder="Enter the title">
+            <textarea name="body" id="content" rows='5' cols="42" placeholder="Enter your views.."></textarea>
+            <button class="btn add-blog-btn" type="submit" onclick="closeForm()">Add</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<div id="overlay" onclick="closeForm()">
+
+</div>

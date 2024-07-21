@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+    <%- include('searchPage') %>
+        
+        <div class="container">
+            <div class="blogs">
+                <h2>Latest Posts</h2>
+                <ul class="blog-list">
+                    <% posts.forEach(post=> { %>
+                        <li><a href="/viewblog/<%=post._id%>">
+                                <span>
+                                    <%=post.title %>
+                                </span>
+                                <span>
+                                    <button class="view-btn">
+                                        view
+                                    </button>
+                                </span>
+                            </a></li>
+                        <% }) %>
+                </ul>
+                <% if (nextPage !==null) { %>
+                    <a href="/viewblogs/?page=<%= nextPage %>" class="pagination">View Older Posts &lt;</a>
+                    <% } %>
+            </div>
+        </div>
+        <%- include('partials/footer') %>
+
+            <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+            <script src="/js/script.js"></script>
+            </body>
+
+            </html>

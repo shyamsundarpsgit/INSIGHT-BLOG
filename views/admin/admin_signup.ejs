@@ -1,0 +1,18 @@
+<%- include('admin_header') %>
+
+
+<div class="container" data-aos="zoom-in-down">
+    <div class="registration">
+        <div class="reg-container">
+            <h2>Admin_Signup</h2>
+            <form action="/admin/signup" method="post" class="reg-form">
+                <input type="text" name="name" required placeholder="Enter your name">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="password" name="password" required placeholder="Enter the password">
+                <button class="btn reg-form-submit" type="submit">Submit</button>
+                <a href="/admin/login">Already have an account?Then LogIn here</a>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('admin_footer') %>

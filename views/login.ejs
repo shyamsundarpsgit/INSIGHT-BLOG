@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+    <div class="container" data-aos="zoom-in-down">
+        <div class="registration">
+            <div class="reg-container">
+                <h2>LogIn</h2>
+                <form action="/login" method="post" class="reg-form">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <input type="password" name="password" required placeholder="Enter the password">
+                    <button class="btn reg-form-submit" type="submit">Submit</button>
+                    <a href="/signup">Don't have an account?Then SignUp here</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+
+        <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+        <script src="/js/script.js"></script>
+        </body>
+
+        </html>

@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+    <div class="container" data-aos="zoom-in-down">
+        <div class="registration">
+            <div class="reg-container">
+                <h2>Signup</h2>
+                <form action="/signup" method="post" class="reg-form">
+                    <input type="text" name="name" required placeholder="Enter your name">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <input type="password" name="password" required placeholder="Enter the password">
+                    <button class="btn reg-form-submit" type="submit">Submit</button>
+                    <a href="/login">Already have an account?Then LogIn here</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+        <script src="/js/script.js"></script>
+        </body>
+
+        </html>
