@@ -217,34 +217,46 @@ h2 {
 }
 
 .blog-list {
+    width:100%;
+    max-width:450px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .blog-list li {
+    width:100%;
     background-color: white;
     border-radius: 20px;
     padding: 10px 15px;
+    display:flex;
+    justify-content: space-between;
 }
 
 .blog-list li a {
     display: flex;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    max-width:250px;
     justify-content: space-between;
     align-items: center;
 }
-
-.view-btn {
+.edit-dlt{
+    display:flex;
+    align-items: center;
+    gap:10px;
+}
+.update-btn{
     background-color: var(--btn-background-color);
     border: none;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 16px;
-    padding: 10px 15px;
+    padding: 8px 10px;
 }
 
-.view-btn:hover {
+.update-btn:hover {
     background-color: #00aeff;
-    color: #ffff;
+    color: #313131;
 }
 
 /* View Blogs */
@@ -295,7 +307,7 @@ h2 {
     align-items: center;
     position:relative;
 } */
-#add-blog-container {
+#add-edit-container {
     position: absolute;
     top:150px !important;
     left:calc(50% - 200px);
@@ -304,7 +316,7 @@ h2 {
 }
 
 
-.add-blog-btn {
+.blog-btn {
     background-color: var(--btn-background-color) !important;
     border-radius: 20px;
     width: 100%;
@@ -368,7 +380,6 @@ h2 {
     color: var(--primary-color);
 }
 
-
 /* Close  */
 .close {
     padding: 5px 8px;
@@ -384,7 +395,7 @@ h2 {
     background-color: #ADD8E6;
 }
 
-/* Search */
+/* Search*/
 .search-container {
     display: flex;
     justify-content: flex-end;
@@ -413,3 +424,4 @@ h2 {
 .dropdown-toggle:hover {
     background-color: var(--btn-background-color) !important;
 }
+

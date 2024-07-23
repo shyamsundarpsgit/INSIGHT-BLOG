@@ -74,9 +74,8 @@ const userSignUP = async (req, res) => {
     req.session.userId = data._id;
     //set jwt in response
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    
-    res.redirect('/viewblogs');
-   
+
+    res.redirect("/viewblogs");
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -111,8 +110,8 @@ const userLogIn = async (req, res) => {
     req.session.userId = user._id;
     //set jwt in response
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-  
-    res.redirect('/viewblogs');
+
+    res.redirect("/viewblogs");
   } catch (err) {
     console.log("error is", err.meassage);
     res.status(500).json({
@@ -134,14 +133,16 @@ const createBlog = async (req, res) => {
     body: body,
     user_Id: req.session.userId,
   });
-  res.redirect('/viewblogs');
+  res.redirect("/viewblogs");
 };
 
 // Get all Blogs
 const getAllBlogs = async (req, res) => {
   try {
+    const userId = req.session.userId;
     const { posts, page, hasNextPage, nextPage } = await pagination(req);
     res.render("blogpage", {
+      userId,
       posts,
       current: page,
       nextPage: hasNextPage ? nextPage : null,
@@ -150,7 +151,7 @@ const getAllBlogs = async (req, res) => {
     res.status(500).json({
       message: error.message,
     });
-    console.log(error.message);
+    console.log("error is", error.message);
   }
 };
 
@@ -162,6 +163,26 @@ const getBlog = async (req, res) => {
     res.render("blog", { blog });
   } catch (err) {
     console.log(err.meassage);
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+//View User Posts
+const viewUserPost = async (req, res) => {
+  try {
+    let userId = req.session.userId;
+    const posts = await Post.find({ user_Id: userId });
+    if (posts.length === 0) {
+      console.log("The user has no blogs");
+      return res.status(400).json({
+        message: "The user has no blogs",
+      });
+    }
+    res.render("userBlog", { posts, userId });
+  } catch (err) {
+    console.log("Error is", err.meassage);
     res.status(500).json({
       message: err.message,
     });
@@ -198,4 +219,5 @@ module.exports = {
   getAllBlogs,
   getBlog,
   searchBlog,
+  viewUserPost,
 };

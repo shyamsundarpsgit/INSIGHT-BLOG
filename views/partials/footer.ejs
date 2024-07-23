@@ -10,13 +10,14 @@
 
 </footer>
 </div>
-<div id="add-blog-container"  data-aos="zoom-in-down">
+<div id="add-edit-container"  data-aos="zoom-in-down">
     <div class="blog-container" >
-        <h3>Add Blog <span class="close" onclick="closeForm()"> <i class="fa-solid fa-xmark"></i></span></h3>
+        <h3 id="add-blog-head"><span id="blog-head">Add Blog</span> <span class="close" onclick="closeForm()"> <i class="fa-solid fa-xmark"></i></span></h3>
         <form action="/addblog" method="post" class="blog-add-form">
-            <input type="text" name="title" required placeholder="Enter the title">
+            <input type="text" name="title" required placeholder="Enter the title" id="title">
             <textarea name="body" id="content" rows='5' cols="42" placeholder="Enter your views.."></textarea>
-            <button class="btn add-blog-btn" type="submit" onclick="closeForm()">Add</button>
+            <button id="add-post"  class="btn blog-btn" type="submit" onclick="closeForm()">Add</button>
+            <button id="edit-post" class="btn blog-btn" type="submit" onclick="closeForm()">Edit</button>
         </form>
     </div>
 </div>

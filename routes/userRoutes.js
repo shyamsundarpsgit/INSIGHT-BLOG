@@ -10,6 +10,7 @@ const {
   searchBlog,
   userSignUP,
   userLogIn,
+  viewUserPost,
 } = require("../controllers/userController");
 
 const {
@@ -26,5 +27,7 @@ router.post('/login',userLogIn);
 router.post("/addblog", requireAuth, authenticateAndCheckUser, createBlog);
 router.get("/viewblogs", requireAuth, authenticateAndCheckUser, getAllBlogs);
 router.get("/viewblog/:id", requireAuth, authenticateAndCheckUser, getBlog);
+router.get('/userblog/:id',requireAuth,authenticateAndCheckUser,viewUserPost);
 router.post("/search", requireAuth, authenticateAndCheckUser, searchBlog);
 module.exports = router;
+  

@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
     <%- include('searchPage') %>
-        
+
         <div class="container">
             <div class="blogs">
                 <h2>Latest Posts</h2>
@@ -10,12 +10,11 @@
                                 <span>
                                     <%=post.title %>
                                 </span>
-                                <span>
-                                    <button class="view-btn">
-                                        view
-                                    </button>
-                                </span>
-                            </a></li>
+                            </a><span class="edit-dlt">
+                                <a href="/viewblog/<%=post._id%>"><button class="view-btn update-btn">
+                                    <i class="fa-solid fa-eye"></i>
+                                    </button></a></span></li>
+
                         <% }) %>
                 </ul>
                 <% if (nextPage !==null) { %>
