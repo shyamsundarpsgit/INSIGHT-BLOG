@@ -13,7 +13,7 @@ let editPostButton = document.getElementById("edit-post-btn");
 let addBlog = document.getElementById("add-edit-container");
 let blogHead = document.getElementById("blog-head");
 let addEditForm = document.getElementById("add-edit-form");
-
+let deletePostContainer = document.getElementById('delete-post-container');
 //set overlay
 overlay.style.display = "none";
 
@@ -50,6 +50,7 @@ function closeForm() {
   addEditForm.reset();
   addBlog.style.display = "none";
   overlay.style.display = "none";
+  deletePostContainer.style.display ='none';
 }
 
 //Create Post
@@ -94,6 +95,7 @@ async function editPost() {
       }
     );
     await submitEdittedData.json();
+  
   } catch (err) {
     console.log("Error", err.message);
   }
@@ -101,3 +103,34 @@ async function editPost() {
 
 
 //Delete Post
+let deletePostId;
+function viewDeletePost(id){
+ deletePostId = id;
+ deletePostContainer.style.display ='block';
+ overlay.style.display = "block";
+}
+
+async function deletePost(){
+ try{
+  const deletedPost = readFormData();
+    await fetch(
+    "http://localhost:3000/userblog/"+deletePostId,
+    {
+      method:"DELETE",
+      headers:{
+        "Content-type":"application/json",
+      },
+     body: JSON.stringify(deletedPost)
+    }
+  );
+
+  allData.filter((element,index)=>{
+    if(element.id===deletePostId){
+      allData.splice(index,1); 
+    }
+  });
+  console.log("Success:");
+ }catch(err){
+   console.log("Error",err.message);
+ }
+}
