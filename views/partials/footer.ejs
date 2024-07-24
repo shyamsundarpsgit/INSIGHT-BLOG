@@ -10,18 +10,31 @@
 
 </footer>
 </div>
-<div id="add-edit-container"  data-aos="zoom-in-down">
-    <div class="blog-container" >
-        <h3 id="add-blog-head"><span id="blog-head">Add Blog</span> <span class="close" onclick="closeForm()"> <i class="fa-solid fa-xmark"></i></span></h3>
-        <form action="/addblog" method="post" class="blog-add-form">
-            <input type="text" name="title" required placeholder="Enter the title" id="title">
+<div id="add-edit-container" data-aos="zoom-in-down">
+    <div class="blog-container">
+        <h3 id="add-blog-head"><span id="blog-head">Add Blog</span> <span class="close" onclick="closeForm()"> <i
+                    class="fa-solid fa-xmark"></i></span></h3>
+        <form class="blog-add-form" id="add-edit-form">
+            <input type="text" name="title" placeholder="Enter the title" id="title">
             <textarea name="body" id="content" rows='5' cols="42" placeholder="Enter your views.."></textarea>
-            <button id="add-post"  class="btn blog-btn" type="submit" onclick="closeForm()">Add</button>
-            <button id="edit-post" class="btn blog-btn" type="submit" onclick="closeForm()">Edit</button>
+            <button id="add-post-btn" class="btn blog-btn" type="submit"
+                onclick="createPost(); closeForm();">Add</button>
+            <button id="edit-post-btn" class="btn blog-btn" type="submit" onclick="editPost(); closeForm();">Edit &
+                Save</button>
         </form>
     </div>
 </div>
-
+<div id="delete-post-container" data-aos="zoom-in-down">
+    <div class="delete-post">
+        <p>Are you want to delete post ?</p>
+        <div class="delete-buttons">
+            <button class="btn cancel-btn">
+                Cancel
+            </button>
+            <button class="btn delete-btn">Delete</button>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 <div id="overlay" onclick="closeForm()">
 

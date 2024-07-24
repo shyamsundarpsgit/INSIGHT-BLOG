@@ -274,7 +274,8 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 600px;
+    width:100%;
+    max-width: 400px;
 }
 
 .view-blog h1 {
@@ -424,4 +425,26 @@ h2 {
 .dropdown-toggle:hover {
     background-color: var(--btn-background-color) !important;
 }
+#edit-post-btn{
+    display:none;
+}
 
+/* Delete post */
+/* #delete-post-container{
+    position: absolute;
+    top:150px !important;
+    left:calc(50% - 200px);
+    z-index: 3;
+    display:none;
+} */
+.delete-post{
+    width: 100%;
+    max-width: 350px;
+    background-color: #fff !important;
+    border-radius: 20px;
+    padding: 30px 35px;
+}
+.cancel-btn{
+  background-color:#F0FFFF ;
+  color:#fff;
+}

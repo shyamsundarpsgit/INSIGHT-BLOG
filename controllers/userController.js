@@ -189,6 +189,41 @@ const viewUserPost = async (req, res) => {
   }
 };
 
+//Edit user's post
+const editUserPost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const isPostExist = await Post.find({ _id: id });
+    if (!isPostExist) {
+      return res.status(404).json({
+        message: "Post with this id is not found",
+      });
+    }
+    const updatedData = {
+      title: req.body.title,
+      body: req.body.body,
+    };
+    await Post.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: `Error occured :err.message`,
+    });
+  }
+};
+
+//getblogs
+const getBlogs = async(req,res)=>{
+  try{
+    const posts = await Post.find({});
+    res.json(posts);
+  }catch(err){
+    console.log(err.message);
+  }
+}
+
 //Search
 const searchBlog = async (req, res) => {
   try {
@@ -220,4 +255,6 @@ module.exports = {
   getBlog,
   searchBlog,
   viewUserPost,
+  editUserPost,
+  getBlogs
 };
