@@ -26,12 +26,13 @@
 </div>
 <div id="delete-post-container" data-aos="zoom-in-down">
     <div class="delete-post">
-        <p>Are you want to delete post ?</p>
+        <p><span class="delete-head">Are you want to delete post ?</span><span class="close" onclick="closeForm()"> <i
+                    class="fa-solid fa-xmark"></i></span></p>
         <div class="delete-buttons">
-            <button class="btn cancel-btn">
+            <button class="btn cancel-btn" onclick="closeForm()">
                 Cancel
             </button>
-            <button class="btn delete-btn">Delete</button>
+            <button class="btn delete-button" onclick="deletePost();closeForm()">Delete</button>
         </div>
     </div>
 </div>
