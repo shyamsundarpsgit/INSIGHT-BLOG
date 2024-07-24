@@ -144,6 +144,7 @@ const getAllBlogs = async (req, res) => {
     res.render("blogpage", {
       userId,
       posts,
+      page,
       current: page,
       nextPage: hasNextPage ? nextPage : null,
     });
@@ -215,14 +216,33 @@ const editUserPost = async (req, res) => {
 };
 
 //getblogs
-const getBlogs = async(req,res)=>{
-  try{
+const getBlogs = async (req, res) => {
+  try {
     const posts = await Post.find({});
     res.json(posts);
-  }catch(err){
+  } catch (err) {
     console.log(err.message);
   }
-}
+};
+
+//Delete User Post
+const deletePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const isExistingPost = await Post.findOne({ _id: id });
+    if (!isExistingPost) {
+      res.status(404).json({
+        message: `post with id ${id} is not found`,
+      });
+    }
+    await Post.deleteOne({_id:id});
+  } catch (err) {
+    console.log("Error",err.message);
+    res.status(500).json({
+      message:err.message
+    });
+  }
+};
 
 //Search
 const searchBlog = async (req, res) => {
@@ -256,5 +276,6 @@ module.exports = {
   searchBlog,
   viewUserPost,
   editUserPost,
-  getBlogs
+  getBlogs,
+  deletePost,
 };
