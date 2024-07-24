@@ -6,20 +6,25 @@
                 <h2>Latest Posts</h2>
                 <ul class="blog-list">
                     <% posts.forEach(post=> { %>
-                        <li><a href="/viewblog/<%=post._id%>">
-                                <span>
+                        <li><span><a href="/viewblog/<%=post._id%>">
+
                                     <%=post.title %>
-                                </span>
-                            </a><span class="edit-dlt">
+
+                                </a></span><span class="edit-dlt">
                                 <a href="/viewblog/<%=post._id%>"><button class="view-btn update-btn">
-                                    <i class="fa-solid fa-eye"></i>
+                                        <i class="fa-solid fa-eye"></i>
                                     </button></a></span></li>
 
                         <% }) %>
                 </ul>
+                <span >
                 <% if (nextPage !==null) { %>
-                    <a href="/viewblogs/?page=<%= nextPage %>" class="pagination">View Older Posts &lt;</a>
+                    <a href="/viewblogs/?page=<%= nextPage %>" class="pagination">View Older Posts &gt;</a>
                     <% } %>
+                 <% if (page >= 2) { %>
+                    <a href="/viewblogs/?page=<%= (page - 1) %>" class="pagination">Back &lt;</a>
+                 <% } %>
+                </span>
             </div>
         </div>
         <%- include('partials/footer') %>
