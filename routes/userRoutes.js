@@ -12,7 +12,8 @@ const {
   userLogIn,
   viewUserPost,
   editUserPost,
-  getBlogs
+  getBlogs,
+  deletePost
 } = require("../controllers/userController");
 
 const {
@@ -38,6 +39,7 @@ router.get('/userblog/:id',requireAuth,authenticateAndCheckUser,viewUserPost);
 
 router.put('/userblog/:id',requireAuth, authenticateAndCheckUser,editUserPost);
 
+router.delete('/userblog/:id',requireAuth, authenticateAndCheckUser,deletePost);
+
 router.post("/search", requireAuth, authenticateAndCheckUser, searchBlog);
 module.exports = router;
-  
