@@ -233,11 +233,10 @@ h2 {
     justify-content: space-between;
 }
 
-.blog-list li a {
+.blog-list li {
     display: flex;
     overflow:hidden;
     text-overflow: ellipsis;
-    max-width:250px;
     justify-content: space-between;
     align-items: center;
 }
@@ -258,7 +257,14 @@ h2 {
     background-color: #00aeff;
     color: #313131;
 }
-
+/* Pagination */
+.pagination{
+    color:white;
+}
+.pagination:hover{
+    color:#fff;
+    text-decoration: underline !important;
+}
 /* View Blogs */
 .blog {
     display: flex;
@@ -430,21 +436,48 @@ h2 {
 }
 
 /* Delete post */
-/* #delete-post-container{
+#delete-post-container{
     position: absolute;
     top:150px !important;
     left:calc(50% - 200px);
     z-index: 3;
-    display:none;
-} */
+    display:none; 
+}
 .delete-post{
     width: 100%;
-    max-width: 350px;
+    max-width: 450px;
     background-color: #fff !important;
     border-radius: 20px;
     padding: 30px 35px;
 }
+.delete-post p{
+    padding:10px 0;
+    display:flex !important;
+    align-items: center;
+    gap:40px;
+}
+.delete-buttons{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap:5px;
+    padding:10px 0;
+}
 .cancel-btn{
-  background-color:#F0FFFF ;
-  color:#fff;
+  background-color:#F0FFFF !important ;
+  color:black !important;
+}
+.delete-button{
+    background-color:rgba(235, 80, 108, 1) !important;
+    color:#fff !important;
+}
+.delete-head{
+    font-size:16px;
+    font-weight: 600;
+}
+.cancel-btn:hover{
+    background-color:#9cacac !important;
+}
+.delete-button:hover{
+    background-color: red !important;
 }
