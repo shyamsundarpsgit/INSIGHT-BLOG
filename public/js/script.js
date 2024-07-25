@@ -134,3 +134,9 @@ async function deletePost(){
    console.log("Error",err.message);
  }
 }
+
+//go to back
+
+function goBack(){
+  window.history.back();
+}
