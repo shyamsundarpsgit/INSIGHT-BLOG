@@ -23,7 +23,7 @@ const getAdminLogIn = async(req,res)=>{
     }
 }
 
-//Check Admin LogIn check
+//Check Admin LogIn 
 const adminLogIn = async (req, res) => {
   try {
     const {email, password } = req.body;
@@ -69,6 +69,14 @@ const adminSignUp = async(req,res)=>{
     });
 }
 
+const getUserPostDetails = async(req,res)=>{
+  res.redirect('/admin/home');
+};
+
+const getAdminHome = async(req,res)=>{
+  res.render('admin/admin_dashboard');
+};
+
 
 
 
@@ -79,4 +87,6 @@ module.exports = {
   getAdminLogIn,
   getAdminSignUp,
   adminSignUp,
+  getUserPostDetails,
+  getAdminHome,
 };
