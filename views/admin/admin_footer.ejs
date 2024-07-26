@@ -7,8 +7,31 @@
     </div>
 </footer>
 </div>
-<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-<script src="../js/adminUser.js"></script>
-</body>
+<div id="add-edit-container" data-aos="zoom-in-down">
+    <div class="blog-container">
+        <h3 id="add-blog-head"><span id="blog-head">Edit Blog</span> <span class="close" onclick="closeForm()"> <i
+                    class="fa-solid fa-xmark"></i></span></h3>
+        <form class="blog-add-form" id="add-edit-form">
+            <input type="text" name="title" placeholder="Enter the title" id="title">
+            <textarea name="body" id="content" rows='5' cols="42" placeholder="Enter your views.."></textarea>
+            <button id="edit-post-btn" class="btn blog-btn" type="submit" onclick="editPost(); closeForm();">Edit &
+                Save</button>
+        </form>
+    </div>
+</div>
+<div id="delete-post-container" data-aos="zoom-in-down">
+    <div class="delete-post">
+        <p><span class="delete-head">Are you want to delete post ?</span><span class="close" onclick="closeForm()"> <i
+                    class="fa-solid fa-xmark"></i></span></p>
+        <div class="delete-buttons">
+            <button class="btn cancel-btn" onclick="closeForm()">
+                Cancel
+            </button>
+            <button class="btn delete-button" onclick="deletePost();closeForm()">Delete</button>
+        </div>
+    </div>
+</div>
 
-</html>
+<div id="overlay" onclick="closeForm()">
+
+</div>

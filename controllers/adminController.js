@@ -77,9 +77,72 @@ const getAdminHome = async(req,res)=>{
   res.render('admin/admin_dashboard');
 };
 
+const getAdminPosts = async(req,res)=>{
+  // const posts = await Post.find({});
+  // res.render('admin/adminPosts',{
+  //   posts
+  // });
+  res.render('admin/adminPosts');
+};
 
+const getAdminAllPosts = async(req,res)=>{
+  const posts = await Post.find({});
+  res.json(posts)
+}
 
+//Admit Edit Post
+const adminEditPost = async (req,res)=>{
+ try{
+  const id = req.params.id;
+  let data = req.body;
+ let post = await Post.findOne({_id:id});
+ if(!post){
+  return res.status(404).json({
+    message:"Post with this id is not found"
+  });
+ }
+  let updatedPost = await Post.findByIdAndUpdate(id,data,{ new: true });
+  console.log("Updated Successfully");
+  res.json({ message: "Employee updated successfully" });
+ }catch(err){
+  console.log("Error",err.message);
+  res.status(500).json({
+    message:err.message
+  });
+ }
+};
 
+//view post 
+const getAdminBlog = async(req,res)=>{
+  try {
+    let blogId = req.params.id;
+    const blog = await Post.findById({ _id: blogId });
+    res.render("blog", { blog });
+  } catch (err) {
+    console.log(err.meassage);
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+//Delete post
+const deleteAdminPost = async(req,res)=>{
+try{
+  const id = req.params.id;
+  let isExistingPost = await Post.findOne({_id:id});
+  if(!isExistingPost){
+    return res.status(404).json({
+      message:"Post with this id is not found"
+    });
+  }
+  await Post.findByIdAndDelete({_id:id});
+  res.json({
+    message:"Post deleted successfully"
+  });
+}catch(err){
+  console.log(err.message);
+}
+}
 
 module.exports = {
   viewAdminPage,
@@ -89,4 +152,8 @@ module.exports = {
   adminSignUp,
   getUserPostDetails,
   getAdminHome,
+  getAdminPosts,
+  getAdminAllPosts,
+  adminEditPost,getAdminBlog,
+  deleteAdminPost
 };
