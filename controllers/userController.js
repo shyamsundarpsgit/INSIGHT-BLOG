@@ -120,10 +120,10 @@ const userLogIn = async (req, res) => {
   }
 };
 
-//save posts
+//Create posts
 const createBlog = async (req, res) => {
   const { title, body } = req.body;
-  if (!title || !body) {
+  if (!title || !body) { 
     res.status(400).json({
       message: "Required fields are missing: title or body",
     });
@@ -133,7 +133,7 @@ const createBlog = async (req, res) => {
     body: body,
     user_Id: req.session.userId,
   });
-  res.redirect("/viewblogs");
+  res.status(201).json(newBlog);
 };
 
 // Get all Blogs
@@ -181,7 +181,7 @@ const viewUserPost = async (req, res) => {
         message: "The user has no blogs",
       });
     }
-    res.render("userBlog", { posts, userId });
+     res.render("userBlog", { posts, userId });
   } catch (err) {
     console.log("Error is", err.meassage);
     res.status(500).json({
@@ -208,6 +208,8 @@ const editUserPost = async (req, res) => {
       new: true,
       runValidators: true,
     });
+    res.json(updatedData);
+
   } catch (err) {
     res.status(500).json({
       message: `Error occured :err.message`,
@@ -219,7 +221,7 @@ const editUserPost = async (req, res) => {
 const getBlogs = async (req, res) => {
   try {
     const posts = await Post.find({});
-    res.json(posts);
+    res.status(200).json(posts);
   } catch (err) {
     console.log(err.message);
   }
@@ -231,11 +233,14 @@ const deletePost = async (req, res) => {
     const id = req.params.id;
     const isExistingPost = await Post.findOne({ _id: id });
     if (!isExistingPost) {
-      res.status(404).json({
+     return res.status(404).json({
         message: `post with id ${id} is not found`,
       });
     }
-    await Post.deleteOne({_id:id});
+    const deletePost = await Post.deleteOne({_id:id});
+    res.json({
+      message:"Success"
+    })
   } catch (err) {
     console.log("Error",err.message);
     res.status(500).json({

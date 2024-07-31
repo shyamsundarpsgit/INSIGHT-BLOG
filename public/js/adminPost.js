@@ -3,8 +3,6 @@ if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);
 }
 
-AOS.init();
-
 let blogList = document.getElementById("blog-list");
 let postTitle = document.getElementById("title");
 let postContent = document.getElementById("content");
@@ -31,12 +29,16 @@ function closeForm() {
   deletePostContainer.style.display = "none";
 }
 
-let allPost = [];
-let postData = "";
+let allPost;
 fetchAllPost();
 async function fetchAllPost() {
   const fetchedData = await fetch("http://localhost:3000/admin/getpost");
   allPost = await fetchedData.json();
+  displayBlog();
+}
+
+function displayBlog() {
+  let postData = "";
   allPost.map((post) => {
     postData += ` <li><span><a href="/admin/viewpost/${post._id}">${post.title}</a></span><span class="edit-dlt"><a href="/admin/viewpost/${post._id}">
   <button class="view-btn update-btn">
@@ -52,6 +54,7 @@ async function fetchAllPost() {
   });
   blogList.innerHTML = postData;
 }
+
 //Edit posts
 let postId;
 function viewAdminEditPost(title, body, id) {
@@ -66,8 +69,8 @@ function viewAdminEditPost(title, body, id) {
 async function editPost() {
   try {
     let edittedData = readFormData();
-    const editId = postId;
-    const response = await fetch(`http://localhost:3000/admin/post/${editId}`, {
+    const id = postId;
+    const response = await fetch("http://localhost:3000/admin/post/" + id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -78,15 +81,16 @@ async function editPost() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    let index = allPost.findIndex((post) => post._id === editId);
+    console.log(data);
+    let index = allPost.findIndex((post) => post._id === id);
     if (index === -1) {
       console.log("Element not found");
     } else {
       allPost[index].title = edittedData.title;
       allPost[index].body = edittedData.body;
+      displayBlog();
       console.log("Post updated successfully:");
     }
-    location.reload();
   } catch (err) {
     console.log("Error", err.message);
   }
@@ -100,28 +104,34 @@ function viewAdminDeletePost(id) {
   deletePostContainer.style.display = "block";
   overlay.style.display = "block";
 }
-async function deletePost(){
- try{
-  const id = deleteId;
-  let deleteData = readFormData();
-  let response = await fetch(
-    "http://localhost:3000/admin/post/"+id,
-    {
-      method:"DELETE",
-      headers:{
-        "Content-type":"applicaiton/json"
+async function deletePost() {
+  try {
+    const id = deleteId;
+    let deleteData = readFormData();
+    let response = await fetch("http://localhost:3000/admin/post/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "applicaiton/json",
       },
-      body:JSON.stringify(deleteData)
+      body: JSON.stringify(deleteData),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  );
-  allPost.filter((post,index)=>{
-    if(post._id === deleteData){
-      allPost.slice(index,1);
-    }
-  })
-  location.reload();
-  console.log("Success");
- }catch(err){
-  console.log("Error",err.message);
- }
+    allPost.forEach((post, index) => {
+      if (post._id === id) {
+        allPost.splice(index, 1);
+      }
+    });
+    displayBlog();
+    console.log("Success");
+  } catch (err) {
+    console.log("Error", err.message);
+  }
+}
+
+//go to back
+
+function goBack() {
+  window.history.back();
 }

@@ -3,7 +3,7 @@
     <div class="registration">
         <div class="reg-container">
             <h2>Admin_LogIn</h2>
-            <form action="/admin/login" method="post" class="reg-form">
+            <form action="/admin/account/login" method="post" class="reg-form">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <input type="password" name="password" required placeholder="Enter the password">
                 <button class="btn reg-form-submit" type="submit">Submit</button>
@@ -14,8 +14,7 @@
     </div>
 </div>
 <%- include('admin_footer') %>
-<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-<script src="/js/adminPost.js"></script>
+
 </body>
 
 </html>

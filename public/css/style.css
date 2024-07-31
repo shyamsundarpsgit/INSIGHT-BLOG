@@ -516,4 +516,25 @@ h2 {
 
 .user-details:hover,.post-details:hover{
     text-decoration: underline !important;
+    color:#fff;
+}
+
+/* Admin-User */
+
+.table{
+    background-color: #fff !important;
+    border-radius: 16px !important;
+    padding:10px !important;
+}
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+.user-table-head{
+    font-size:24px;
+    font-weight: 600;
+    color:#fff;
+}
+.user-details tr{
+ 
 }

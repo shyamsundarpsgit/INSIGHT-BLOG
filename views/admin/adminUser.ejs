@@ -17,9 +17,32 @@
       </table>
     </div>
   </div>
-  <%- include('admin_footer') %>
-    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-    <script src="/js/adminUsers.js"></script>
-    </body>
+  </section>
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-content">
+        <h6>"The best way to predict the future is to create it." - Peter Drucker</h6>
+      </div>
+    </div>
+  </footer>
+  </div>
+  <div id="delete-post-container" data-aos="zoom-in-down">
+    <div class="delete-post">
+      <p><span class="delete-head">Are you want to delete post ?</span><span class="close" onclick="closeForm()"> <i
+            class="fa-solid fa-xmark"></i></span></p>
+      <div class="delete-buttons">
+        <button class="btn cancel-btn" onclick="closeForm()">
+          Cancel
+        </button>
+        <button class="btn delete-button" onclick="deleteUser();closeForm()">Delete</button>
+      </div>
+    </div>
+  </div>
 
-    </html>
+  <div id="overlay" onclick="closeForm()">
+
+  </div>
+  <script src="/js/adminUsers.js"></script>
+  </body>
+
+  </html>

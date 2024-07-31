@@ -4,32 +4,16 @@
         <div class="container">
             <div class="blogs">
                 <h2>Latest Posts</h2>
-                <ul class="blog-list">
-                    <% posts.forEach(post=> { %>
-                        <li><span><a href="/viewblog/<%=post._id%>">
-
-                                    <%=post.title %>
-
-                                </a></span><span class="edit-dlt">
-                                <a href="/viewblog/<%=post._id%>"><button class="view-btn update-btn">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </button></a></span></li>
-
-                        <% }) %>
+                <ul class="blog-list" id="total-blogs">
+                    
                 </ul>
-                <span >
-                <% if (nextPage !==null) { %>
-                    <a href="/viewblogs/?page=<%= nextPage %>" class="pagination">View Older Posts &gt;</a>
-                    <% } %>
-                 <% if (page >= 2) { %>
-                    <a href="/viewblogs/?page=<%= (page - 1) %>" class="pagination">Back &lt;</a>
-                 <% } %>
+                <span id="pagination-content" >
+                
                 </span>
             </div>
         </div>
         <%- include('partials/footer') %>
 
-            <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
             <script src="/js/script.js"></script>
             </body>
 

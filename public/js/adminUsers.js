@@ -3,9 +3,13 @@ if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);
 }
 
-AOS.init();
-
 let userDetails = document.getElementById("user-details");
+let deletePostContainer = document.getElementById("delete-post-container");
+let overlay = document.getElementById("overlay");
+function closeForm() {
+  overlay.style.display = "none";
+  deletePostContainer.style.display = "none";
+}
 
 //GET USER
 let allUsers;
@@ -29,12 +33,31 @@ function displayUsers() {
     <i class="fa-solid fa-ellipsis"></i>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">View</a></li>
-    <li><a class="dropdown-item" href="#">Edit</a></li>
-    <li><a class="dropdown-item" href="#">Delete</a></li>
+    <li><a class="dropdown-item" href="#" onclick="viewAdminDeleteUser('${user._id}')">Delete</a></li>
   </ul>
 </div></td>
      </tr>`;
   });
   userDetails.innerHTML = tableData;
+}
+
+
+//Delete
+function viewAdminDeletePost(id) {
+  deleteId = id;
+  deletePostContainer.style.display = "block";
+  overlay.style.display = "block";
+}
+
+async function deleteUser(){
+  const id = deleteId;
+  const response = await fetch("/admin/user:id",
+    {
+      method:"DELETE",
+      headers: {
+        "Content-type": "applicaiton/json",
+      },
+      body: JSON.stringify(deleteData),
+    }
+  );
 }
