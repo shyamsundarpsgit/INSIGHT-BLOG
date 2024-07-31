@@ -181,7 +181,7 @@ const viewUserPost = async (req, res) => {
         message: "The user has no blogs",
       });
     }
-     res.render("userBlog", { posts, userId });
+     res.render("userBlog");
   } catch (err) {
     console.log("Error is", err.meassage);
     res.status(500).json({
@@ -219,8 +219,9 @@ const editUserPost = async (req, res) => {
 
 //getblogs
 const getBlogs = async (req, res) => {
-  try {
-    const posts = await Post.find({});
+  try{
+    const id = req.session.userId;
+    const posts = await Post.find({user_Id:id});
     res.status(200).json(posts);
   } catch (err) {
     console.log(err.message);

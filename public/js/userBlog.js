@@ -57,8 +57,6 @@ function displayBlogs() {
   userBlogs.innerHTML = blogData;
 }
 
-
-
 // <% if (nextPage !==null) { %>
 //   <a href="/viewblogs/?page=<%= nextPage %>" class="pagination">View Older Posts &gt;</a>
 //   <% } %>
@@ -108,6 +106,11 @@ async function createPost() {
   }
 }
 
+//Get User Created Posts
+async function getUserPost(id){
+  console.log(id);
+}
+
 //Edit user post
 let postId;
 function viewEditPost(title, body, id) {
@@ -147,6 +150,7 @@ async function editPost() {
     console.log("Error", err.message);
   }
 }
+
 
 //Delete Post
 let deletePostId;
