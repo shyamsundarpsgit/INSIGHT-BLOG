@@ -22,6 +22,7 @@ router.get("/admin/signup", getAdminSignUp);
 router.get('/admin/viewpost/:id',getAdminBlog)
 router.post("/admin/account/signup",adminSignUp);
 router.post("/admin/account/login",getUserPostDetails);
+router.get("/admin/account/login",getUserPostDetails)
 router.get("/admin/posts",getAdminPosts);
 router.get('/admin/getpost',getAdminAllPosts);
 router.put('/admin/post/:id', adminEditPost);

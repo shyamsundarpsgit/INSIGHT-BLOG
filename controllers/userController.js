@@ -136,6 +136,7 @@ const createBlog = async (req, res) => {
   res.status(201).json(newBlog);
 };
 
+
 // Get all Blogs
 const getAllBlogs = async (req, res) => {
   try {
@@ -222,6 +223,11 @@ const getBlogs = async (req, res) => {
   try{
     const id = req.session.userId;
     const posts = await Post.find({user_Id:id});
+    if(!posts){
+      return res.status(400).json({
+        message:"You don'have a post"
+      })
+    }
     res.status(200).json(posts);
   } catch (err) {
     console.log(err.message);
@@ -270,6 +276,25 @@ const searchBlog = async (req, res) => {
   }
 };
 
+//Get Blogs
+const blogs = async (req,res)=>{
+ try{
+  const posts = await Post.find({});
+  if(!posts){
+    return res.status(404).json({
+      message:"No posts created yet"
+    })
+  }
+  res.status(200).json(posts);
+ }catch(err){
+  console.log(err.message);
+  res.status(500).json({
+    message:err.message
+  })
+ }
+};
+
+
 module.exports = {
   userSignUP,
   userLogIn,
@@ -284,4 +309,5 @@ module.exports = {
   editUserPost,
   getBlogs,
   deletePost,
+  blogs,
 };

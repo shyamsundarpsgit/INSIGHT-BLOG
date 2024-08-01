@@ -13,7 +13,8 @@ const {
   viewUserPost,
   editUserPost,
   getBlogs,
-  deletePost
+  deletePost,
+  blogs
 } = require("../controllers/userController");
 
 const {
@@ -30,6 +31,8 @@ router.post('/login',userLogIn);
 router.post("/addblog", requireAuth, authenticateAndCheckUser, createBlog);
 
 router.get("/viewblogs", requireAuth, authenticateAndCheckUser, getAllBlogs);
+
+router.get('/blogs',requireAuth, authenticateAndCheckUser,blogs);
 
 router.get('/viewallblogs',requireAuth, authenticateAndCheckUser,getBlogs)
 

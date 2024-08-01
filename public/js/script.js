@@ -28,7 +28,7 @@ function readFormData() {
 let allData;
 getAllData();
 async function getAllData() {
-  const posts = await fetch("http://localhost:3000/viewallblogs");
+  const posts = await fetch("http://localhost:3000/blogs");
   const allPostData = await posts.json();
   allData = allPostData;
   displayBlogs();
