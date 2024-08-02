@@ -40,7 +40,7 @@ async function fetchAllPost() {
 function displayBlog() {
   let postData = "";
   allPost.map((post) => {
-    postData += ` <li><span><a href="/admin/viewpost/${post._id}">${post.title}</a></span><span class="edit-dlt"><a href="/admin/viewpost/${post._id}">
+    postData += ` <li><span><a href="/admin/viewpost/${post._id}" class="blog-content">${post.title}</a></span><span class="edit-dlt"><a href="/admin/viewpost/${post._id}">
   <button class="view-btn update-btn">
   <i class="fa-solid fa-eye"></i>
   </button></a>

@@ -5,13 +5,13 @@
             Choose
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#" id="add-post" onclick="addPost()"><i class="fa-solid fa-plus"></i>
-                    Add a blog</a></li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="#" id="add-post" onclick="addPost()">
+                    Add a blog <i class="fa-solid fa-plus"></i></a></li>
             <li><a class="dropdown-item" href="/userblog/<%=userId%>">View Your Posts</a></li>
         </ul>
     </div>
     <div class="search-bar">
-        <form action="/search" method="post">
+        <form action="/search" method="post" class="search-form">
             <input type="search" id="searchInput" placeholder="search..." name="searchedItem">
         </form>
     </div>

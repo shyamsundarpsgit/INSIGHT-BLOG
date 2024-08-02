@@ -51,10 +51,12 @@ body a {
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: 700;
-    padding: 5px;
-    color: #fff;
+  max-width:100px;
+  font-size:20px;
+  padding:5px;
+}
+.logo img{
+    max-width:45%;
 }
 
 .header-buttons {
@@ -215,7 +217,10 @@ h2 {
     align-items: center;
     justify-content: center;
 }
-
+.blogs h2{
+    font-size:28px;
+    font-weight: 600;
+}
 .blog-list {
     width:100%;
     max-width:450px;
@@ -239,6 +244,11 @@ h2 {
     text-overflow: ellipsis;
     justify-content: space-between;
     align-items: center;
+}
+.blog-content{
+    font-size:16px;
+    font-weight: 500;
+    color:var(--primary-color);
 }
 .edit-dlt{
     display:flex;
@@ -410,7 +420,20 @@ h2 {
     gap: 20px;
     align-items: center;
 }
+.dropdown-toggle{
+    font-size:15px !important;
+    font-weight: 400 !important;
+    padding:10px 15px !important;
 
+}
+.dropdown-item{
+    font-size:15px !important;
+    font-weight: 400 !important;
+    color:black !important;
+}
+.dropdown-item:focus{
+    background: transparent !important;
+}
 .dropdown-menu:focus,
 .dropdown-menu.show {
     box-shadow: none !important;
@@ -419,6 +442,18 @@ h2 {
 
 .dropdown-toggle:focus {
     box-shadow: none !important;
+}
+
+.search-form input{
+    width:100%;
+    max-width:200px;
+    padding:10px 15px;
+    border-radius:20px;
+    outline:none;
+    border:none;
+    font-size:15px;
+    font-weight: 500;
+    color:black;
 }
 
 /* Change background color of dropdown when focused */
@@ -486,15 +521,23 @@ h2 {
 /* getback */
 .get-back{
     text-align: center;
+    padding-top:50px;
 }
 .get-back a{
     color:#fff;
+    font-size:16px;
+    font-weight: 500;
+    padding-left:320px;
 }
 .get-back a:hover{
     color:#fff;
     text-decoration: underline !important;
 }
-
+.back-admin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 
 /* Admin part */
 .user-details,.post-details{
@@ -535,6 +578,28 @@ h2 {
     font-weight: 600;
     color:#fff;
 }
-.user-details tr{
- 
+
+
+
+
+#delete-user-container{
+    position: absolute;
+    top:150px !important;
+    left:calc(50% - 200px);
+    z-index: 3;
+    display:none; 
 }
+.delete-user{
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff !important;
+    border-radius: 20px;
+    padding: 30px 35px;
+}
+.delete-user p{
+    padding:10px 0;
+    display:flex !important;
+    align-items: center;
+    gap:40px;
+}
+    

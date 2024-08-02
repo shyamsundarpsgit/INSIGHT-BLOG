@@ -13,7 +13,7 @@ const {
   deleteAdminPost,
   getAdminUsers,
   getUser,
-  deleteUser
+  deleteAdminUser
 } = require("../controllers/adminController");
 
 router.get("/admin", viewAdminPage);
@@ -30,6 +30,6 @@ router.delete('/admin/post/:id',deleteAdminPost);
 
 router.get('/admin/getusers',getUser);
 router.get('/admin/users',getAdminUsers);
-router.put('/admin/user/:id',deleteUser);
+router.delete('/admin/user/:id',deleteAdminUser);
 
 module.exports = router;

@@ -38,7 +38,7 @@ async function getAllData() {
 function displayBlogs() {
   let blogData = "";
   allData.forEach((post) => {
-    blogData += ` <li class="post-lists"><a href="/viewblog/${post._id}"><span>${post.title}</span></a>
+    blogData += ` <li class="post-lists"><a href="/viewblog/${post._id}" class="blog-content"><span>${post.title}</span></a>
      <span class="edit-dlt">
           <a href="/viewblog/${post._id}">
               <button class="view-btn update-btn">
