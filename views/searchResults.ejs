@@ -1,45 +1,27 @@
 <%- include('partials/header') %>
-    <!-- <div class="container">
-        <h2>Search Results</h2>
-        <section class="search-result">
-            <ul class="blog-list">
-                <% posts.forEach(post=> { %>
-                    <li><a href="/viewblog/<%=post._id%>">
-                            <span>
-                                <%=post.title %>
-                            </span>
-                            <span>
-                                <button class="view-btn">
-                                    view
-                                </button>
-                            </span>
-                        </a></li>
-                    <% }) %>
-            </ul>
-        </section>
-    </div> -->
     <div class="container">
         <div class="blogs">
             <h2>Latest Posts</h2>
             <ul class="blog-list">
                 <% posts.forEach(post=> { %>
-                    <li><a href="/viewblog/<%=post._id%>">
-                            <span>
+                    <li>
+                        <span>
+                            <a href="/viewblog/<%=post._id%>" class="blog-content">
                                 <%=post.title %>
-                            </span>
-                            <span>
-                                <button class="view-btn">
-                                    view
-                                </button>
-                            </span>
-                        </a></li>
+                            </a>
+                        </span>
+                        <span class="edit-dlt">
+                            <a href="/viewblog/<%=post._id%>"><button class="view-btn update-btn">
+                            <i class="fa-solid fa-eye"></i>
+                            </button></a></span>
+                    </li>
                     <% }) %>
             </ul>
-
+            <div class="get-back"><a href="/viewblogs">Back <i class="fa-solid fa-arrow-left"></i></a></div>
+            
         </div>
         <%- include('partials/footer') %>
 
-            <script src="/js/script.js"></script>
             </body>
 
             </html>
