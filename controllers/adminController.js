@@ -113,7 +113,7 @@ const getAdminBlog = async (req, res) => {
   try {
     let blogId = req.params.id;
     const blog = await Post.findById({ _id: blogId });
-    res.render("blog", { blog });
+    res.render("blog", { blog,userId:blog.user_Id });
   } catch (err) {
     console.log(err.meassage);
     res.status(500).json({
