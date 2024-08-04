@@ -2,6 +2,7 @@ const User = require("../model/userModel");
 const Post = require("../model/post");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { post } = require("../routes/userRoutes");
 
 // Function for pagination
 async function pagination(req) {
@@ -162,7 +163,7 @@ const getBlog = async (req, res) => {
   try {
     let blogId = req.params.id;
     const blog = await Post.findById({ _id: blogId });
-    res.render("blog", { blog });
+    res.render("blog", { blog,userId:blog.user_Id });
   } catch (err) {
     console.log(err.meassage);
     res.status(500).json({
@@ -182,7 +183,7 @@ const viewUserPost = async (req, res) => {
         message: "The user has no blogs",
       });
     }
-     res.render("userBlog");
+     res.render("userBlog",{userId});
   } catch (err) {
     console.log("Error is", err.meassage);
     res.status(500).json({
@@ -267,7 +268,7 @@ const searchBlog = async (req, res) => {
         { body: { $regex: new RegExp(searchNoSpecialChar, "i") } },
       ],
     });
-    res.render("searchResults", { posts });
+    res.render("searchResults", { posts});
   } catch (err) {
     console.log(err.message);
     res.status(500).json({
