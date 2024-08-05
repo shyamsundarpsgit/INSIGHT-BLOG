@@ -24,21 +24,6 @@ const getAdminLogIn = async (req, res) => {
 };
 
 //Check Admin LogIn
-const adminLogIn = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log(req.body);
-    if (!email || !password) {
-      res.status(400).json({
-        message: "Required field is missing : name or email or password",
-      });
-    }
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
-};
 
 //Admin singup page render
 const getAdminSignUp = async (req, res) => {
@@ -67,9 +52,23 @@ const adminSignUp = async (req, res) => {
   });
 };
 
+
 const getUserPostDetails = async (req, res) => {
-  res.render("admin/admin_dashboard");
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400).json({
+        message: "Required field is missing : name or email or password",
+      });
+    }
+    res.render("admin/admin_dashboard");
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
 };
+
 
 const getAdminPosts = async (req, res) => {
   // const posts = await Post.find({});
@@ -113,7 +112,7 @@ const getAdminBlog = async (req, res) => {
   try {
     let blogId = req.params.id;
     const blog = await Post.findById({ _id: blogId });
-    res.render("blog", { blog,userId:blog.user_Id });
+    res.render("blog", { blog, userId: blog.user_Id });
   } catch (err) {
     console.log(err.meassage);
     res.status(500).json({
@@ -201,7 +200,6 @@ const deleteAdminUser = async (req, res) => {
 
 module.exports = {
   viewAdminPage,
-  adminLogIn,
   getAdminLogIn,
   getAdminSignUp,
   adminSignUp,
