@@ -1,10 +1,12 @@
 const Post = require("../model/post");
 const User = require("../model/userModel");
 const Admin = require("../model/admin");
+const jwt = require("jsonwebtoken");
 //Get Admin  page
 const viewAdminPage = async (req, res) => {
   try {
-    res.render("admin/index");
+    const adminId = req.params.id;
+    res.render("admin/index",{adminId});
   } catch (err) {
     console.log(err.message);
     res.status(500).json({
@@ -15,7 +17,8 @@ const viewAdminPage = async (req, res) => {
 //Get Admin Login page render
 const getAdminLogIn = async (req, res) => {
   try {
-    res.render("admin/admin_login");
+    const adminId = req.params.id;
+    res.render("admin/admin_login",{adminId});
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -23,45 +26,36 @@ const getAdminLogIn = async (req, res) => {
   }
 };
 
-//Check Admin LogIn
-
-//Admin singup page render
-const getAdminSignUp = async (req, res) => {
-  try {
-    res.render("admin/admin_signup");
-  } catch (err) {
-    res.statu(500).json({
-      message: err.message,
-    });
-  }
-};
-
-//Admin SignUp Check
-const adminSignUp = async (req, res) => {
-  const { name, email, password } = req.body;
-  console.log(req.body);
-  if (!name || !email || !password) {
-    res.status(400).json({
-      message: "Required field is missing : name,email or password",
-    });
-  }
-  const user = await Admin.create({ name, email, password });
-  res.status(201).json({
-    data: { user },
-    message: "user created successfully",
-  });
-};
-
+//function for creating jwt
+const maxAge = 3*24*60*60;
+const createToken = (id)=>{
+  return jwt.sign({id},process.env.JWT_SECRET,
+    {
+      expiresIn:maxAge
+    }
+  );
+}
 
 const getUserPostDetails = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.status(400).json({
+       return res.status(400).json({
         message: "Required field is missing : name or email or password",
       });
     }
-    res.render("admin/admin_dashboard");
+    const admin = await Admin.findOne({email:email});
+    if(!admin){
+      return res.status(404).json({
+        message:"Admin not found"
+      })
+    }
+    const adminId = admin._id;
+   
+    const token = createToken( adminId);
+    req.session.adminId = admin._id;
+    res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000});
+    res.render("admin/admin_dashboard",{adminId});
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -69,13 +63,13 @@ const getUserPostDetails = async (req, res) => {
   }
 };
 
-
+const   getAdminDashboard = (req,res)=>{
+  const adminId = req.session.adminId;
+  res.render("admin/admin_dashboard",{adminId});
+}
 const getAdminPosts = async (req, res) => {
-  // const posts = await Post.find({});
-  // res.render('admin/adminPosts',{
-  //   posts
-  // });
-  res.render("admin/adminPosts");
+ const adminId = req.session.adminId;
+  res.render("admin/adminPosts",{adminId});
 };
 
 const getAdminAllPosts = async (req, res) => {
@@ -110,9 +104,10 @@ const adminEditPost = async (req, res) => {
 //view post
 const getAdminBlog = async (req, res) => {
   try {
+    const adminId = req.session.adminId;
     let blogId = req.params.id;
     const blog = await Post.findById({ _id: blogId });
-    res.render("blog", { blog, userId: blog.user_Id });
+    res.render("admin/adminBlog", { blog,adminId });
   } catch (err) {
     console.log(err.meassage);
     res.status(500).json({
@@ -143,13 +138,14 @@ const deleteAdminPost = async (req, res) => {
 //GET all users
 const getAdminUsers = async (req, res) => {
   try {
+    const adminId = req.session.adminId;
     const users = await User.find({});
     if (!users) {
       return res.status(404).json({
         message: "No users registered",
       });
     }
-    res.render("admin/adminUser");
+    res.render("admin/adminUser",{adminId});
   } catch (err) {
     console.log("Error", err.meassage);
     res.status(500).json({
@@ -198,11 +194,21 @@ const deleteAdminUser = async (req, res) => {
   }
 };
 
+//Logout admin
+const logOut = (req,res)=>{
+  req.session.destroy((err)=>{
+    if(err){
+      return res.statu(500).send("Failed to Logout");
+    }
+    res.clearCookie('connect.sid');
+    res.cookie('jwt','',{maxAge:1});
+    res.redirect('/admin');
+  })
+}
+
 module.exports = {
   viewAdminPage,
   getAdminLogIn,
-  getAdminSignUp,
-  adminSignUp,
   getUserPostDetails,
   getAdminPosts,
   getAdminAllPosts,
@@ -212,4 +218,6 @@ module.exports = {
   getAdminUsers,
   getUser,
   deleteAdminUser,
+  getAdminDashboard,
+  logOut
 };
