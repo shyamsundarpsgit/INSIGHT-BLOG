@@ -28,8 +28,9 @@ function readFormData() {
 let allData;
 getAllData();
 async function getAllData() {
-  const posts = await fetch("http://localhost:3000/blogs");
-  const allPostData = await posts.json();
+  const response = await fetch("http://localhost:3000/blogs");
+  const allPostData = await response.json();
+  console.log(allPostData);
   allData = allPostData;
   displayBlogs();
 }
@@ -44,50 +45,6 @@ function displayBlogs() {
   });
   totalBlog.innerHTML = blogData;
 }
-
-// <% posts.forEach(post=> { %>
-//   <li><span><a href="/viewblog/<%=post._id%>">
-
-//               <%=post.title %>
-
-//           </a></span><span class="edit-dlt">
-//           <a href="/viewblog/<%=post._id%>"><button class="view-btn update-btn">
-//                   <i class="fa-solid fa-eye"></i>
-//               </button></a></span></li>
-
-//   <% }) %>
-
-// <% if (nextPage !==null) { %>
-//   <a href="/viewblogs/?page=<%= nextPage %>" class="pagination">View Older Posts &gt;</a>
-//   <% } %>
-// <% if (page >= 2) { %>
-//   <a href="/viewblogs/?page=<%= (page - 1) %>" class="pagination">Back &lt;</a>
-// <% } %>
-
-
-
-
-
-
-
-// <% posts.forEach(post=> { %>
-//   <li class="post-lists"><a href="/viewblog/<%=post._id%>">
-//           <span>
-//               <%=post.title %>
-//           </span>
-//       </a> <span class="edit-dlt">
-//           <a href="/viewblog/<%=post._id%>"><button class="view-btn update-btn">
-//                   <i class="fa-solid fa-eye"></i>
-//               </button></a>
-//           <a href="#"><button class="edit-btn update-btn"
-//                   onclick="viewEditPost('<%=post.title%>','<%=post.body%>','<%=post._id%>')">
-//                   <i class="fa-solid fa-pen-to-square"></i>
-//               </button></a>
-//           <a href="#"><button class="delete-btn update-btn" onclick="viewDeletePost('<%=post._id%>')">
-//                   <i class="fa-solid fa-trash"></i>
-//               </button></a>
-//       </span></li>
-//   <% }) %>
 
 //add blog
 function addPost() {
@@ -130,73 +87,6 @@ async function createPost() {
   console.log("Error",err.message);
  }
 }
-
-// //Edit user post
-// let postId;
-// function viewEditPost(title, body, id) {
-//   addPostButton.style.display = "none";
-//   editPostButton.style.display = "block";
-//   blogHead.innerHTML = "Edit Blog";
-//   addBlog.style.display = "block";
-//   overlay.style.display = "block";
-//   postTitle.value = title;
-//   postContent.value = body;
-//   postId = id;
-// }
-
-// async function editPost() {
-//   try {
-//     const id = postId;
-//     let edittedData = readFormData();
-//     const submitEdittedData = await fetch(
-//       "http://localhost:3000/userblog/" + id,
-//       {
-//         method: "PUT",
-//         headers: {
-//           "Content-type": "application/json",
-//         },
-//         body: JSON.stringify(edittedData),
-//       }
-//     );
-//     const response = await submitEdittedData.json();
-//     const index = allData.findIndex((element) => element._id === id);
-//     allData[index].title = response.title;
-//     allData[index].body = response.body;
-//     console.log(allData);
-//   } catch (err) {
-//     console.log("Error", err.message);
-//   }
-// }
-
-// //Delete Post
-// let deletePostId;
-// function viewDeletePost(id) {
-//   deletePostId = id;
-//   deletePostContainer.style.display = "block";
-//   overlay.style.display = "block";
-// }
-
-// async function deletePost() {
-//   try {
-//     const deletedPost = readFormData();
-//     await fetch("http://localhost:3000/userblog/" + deletePostId, {
-//       method: "DELETE",
-//       headers: {
-//         "Content-type": "application/json",
-//       },
-//       body: JSON.stringify(deletedPost),
-//     });
-
-//     allData.filter((element, index) => {
-//       if (element.id === deletePostId) {
-//         allData.splice(index, 1);
-//       }
-//     });
-//     console.log("Success:");
-//   } catch (err) {
-//     console.log("Error", err.message);
-//   }
-// }
 
 //go to back
 

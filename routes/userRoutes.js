@@ -14,7 +14,8 @@ const {
   editUserPost,
   getBlogs,
   deletePost,
-  blogs
+  blogs,
+  logOut
 } = require("../controllers/userController");
 
 const {
@@ -45,4 +46,7 @@ router.put('/userblog/:id',requireAuth, authenticateAndCheckUser,editUserPost);
 router.delete('/userblog/:id',requireAuth, authenticateAndCheckUser,deletePost);
 
 router.post("/search", requireAuth, authenticateAndCheckUser, searchBlog);
+
+router.get('/logout',logOut);
+
 module.exports = router;

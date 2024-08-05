@@ -12,7 +12,12 @@
     </div>
 
     <%- include('admin_footer') %>
-        <!-- <script src="/js/adminPost.js"></script> -->
+    <script>
+        // Prevent a resubmit on refresh and back button
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
         </body>
 
         </html>

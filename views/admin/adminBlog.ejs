@@ -1,0 +1,23 @@
+<%- include('admin_header') %>
+<div class="container">
+    <div class="blog">
+        <div class="view-blog">
+            <h1>
+                <%=blog.title %>
+            </h1>
+            <p>
+                <%=blog.body %>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="get-back"><a href="#" onclick="goBack(); return false;">Back <i class="fa-solid fa-arrow-left"></i></a></div>
+<%- include('admin_footer') %>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+ </body>
+
+ </html>

@@ -14,6 +14,7 @@ const viewAdminPage = async (req, res) => {
     });
   }
 };
+
 //Get Admin Login page render
 const getAdminLogIn = async (req, res) => {
   try {

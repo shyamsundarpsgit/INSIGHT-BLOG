@@ -28,9 +28,11 @@
                         </div>
                     </div>
                     <div class="header-buttons">
-                        <a href="/admin/login"> <button class="btn">LogIn</button></a>
-                        <!-- <a href="/admin/signup"><button class="btn">SignUp</button></a> -->
-                        <a href="/admin"><button class="btn">LogOut</button></a>
+                        <% if (adminId) { %>                     
+                            <a href="/admin/logout"><button class="btn">LogOut</button></a>
+                        <% } else { %>
+                            <a href="/admin/login"> <button class="btn">LogIn</button></a>
+                        <% } %>
                     </div>
                 </div>
             </div>
