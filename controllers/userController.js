@@ -2,37 +2,25 @@ const User = require("../model/userModel");
 const Post = require("../model/post");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { post } = require("../routes/userRoutes");
+// const { post } = require("../routes/userRoutes");
 
-// Function for pagination
-async function pagination(req) {
-  let perPage = 4;
-  let page = parseInt(req.query.page) || 1;
-
-  const posts = await Post.aggregate([{ $sort: { createdAt: -1 } }])
-    .skip(perPage * (page - 1))
-    .limit(perPage)
-    .exec();
-
-  const count = await Post.countDocuments();
-  const nextPage = page + 1;
-  const hasNextPage = nextPage <= Math.ceil(count / perPage);
-  return { posts, page, hasNextPage, nextPage };
-}
 
 //Home
 const renderHome = async (req, res) => {
-  res.render("home");
+  let userId = req.params.id;
+  res.render("home",{userId});
 };
 
 //get signup page
 const getSignUp = async (req, res) => {
-  res.render("signup");
+  let userId = req.params.id;
+  res.render("signup",{userId});
 };
 
 //get login page
 const getLogIn = async (req, res) => {
-  res.render("login");
+  let userId = req.params.id;
+  res.render("login",{userId});
 };
 
 const saltRounds = 10; //for setting salt in hashing
@@ -73,6 +61,7 @@ const userSignUP = async (req, res) => {
 
     // Set session data
     req.session.userId = data._id;
+    
     //set jwt in response
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
 
@@ -142,13 +131,9 @@ const createBlog = async (req, res) => {
 const getAllBlogs = async (req, res) => {
   try {
     const userId = req.session.userId;
-    const { posts, page, hasNextPage, nextPage } = await pagination(req);
     res.render("blogpage", {
       userId,
-      posts,
-      page,
-      current: page,
-      nextPage: hasNextPage ? nextPage : null,
+      
     });
   } catch (error) {
     res.status(500).json({
@@ -281,6 +266,8 @@ const searchBlog = async (req, res) => {
 const blogs = async (req,res)=>{
  try{
   const posts = await Post.find({});
+  const userId = req.session.userId;
+  console.log(posts);
   if(!posts){
     return res.status(404).json({
       message:"No posts created yet"
@@ -295,6 +282,24 @@ const blogs = async (req,res)=>{
  }
 };
 
+//logout
+const logOut = async(req,res)=>{
+  try{
+    req.session.destroy((err) => {
+      if (err) {
+          return res.status(500).send('Failed to log out');
+      }
+      res.clearCookie('connect.sid'); // Clear the session cookie
+      res.cookie('jwt', '', { maxAge: 1 });
+      res.redirect('/');
+  }); 
+  }catch(err){
+    console.log(err.message);
+    res.status(500).json({
+      message:err.message
+    });
+  }
+}
 
 module.exports = {
   userSignUP,
@@ -311,4 +316,5 @@ module.exports = {
   getBlogs,
   deletePost,
   blogs,
+  logOut
 };
